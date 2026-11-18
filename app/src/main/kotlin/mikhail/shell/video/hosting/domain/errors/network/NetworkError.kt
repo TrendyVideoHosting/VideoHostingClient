@@ -14,5 +14,6 @@ enum class NetworkError: Error, Parcelable {
     SERVER_ERROR,
     NOT_FOUND,
     BAD_REQUEST,
-    CONFLICT
+    CONFLICT,
+    MANY_REQUESTS
 }

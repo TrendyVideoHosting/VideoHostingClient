@@ -201,6 +201,7 @@ class VideoRepositoryWithApi @Inject constructor(
             val error = when (e.code()) {
                 401 -> NetworkError.AUTHENTICATION
                 404 -> NetworkError.NOT_FOUND
+                429 -> NetworkError.MANY_REQUESTS
                 500 -> NetworkError.SERVER_ERROR
                 else -> UnexpectedError
             }
@@ -309,6 +310,7 @@ class VideoRepositoryWithApi @Inject constructor(
                     val error = when (response.code()) {
                         401 -> NetworkError.AUTHENTICATION
                         404 -> NetworkError.NOT_FOUND
+                        429 -> NetworkError.MANY_REQUESTS
                         500 ->NetworkError.SERVER_ERROR
                         else -> UnexpectedError
                     }

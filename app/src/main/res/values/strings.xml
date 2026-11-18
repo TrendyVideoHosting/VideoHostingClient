@@ -298,4 +298,5 @@
     <string name="file_not_valid">File is invalid</string>
     <string name="conflict_error">Conflict occurred</string>
     <string name="exit">Close player</string>
+    <string name="many_requests">Too many requests</string>
 </resources>

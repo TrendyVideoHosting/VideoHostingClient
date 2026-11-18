@@ -17,6 +17,7 @@ fun Context.getNetworkErrorMessage(error: NetworkError): String {
         NetworkError.FORBIDDEN -> getString(R.string.forbidden_error)
         NetworkError.SERVER_ERROR -> getString(R.string.server_error)
         NetworkError.CONFLICT -> getString(R.string.conflict_error)
+        NetworkError.MANY_REQUESTS -> getString(R.string.many_requests)
     }
 }
 
