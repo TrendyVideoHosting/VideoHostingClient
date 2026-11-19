@@ -21,6 +21,7 @@ import androidx.core.os.LocaleListCompat
 import androidx.core.view.WindowCompat
 import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import mikhail.shell.video.hosting.presentation.settings.Locale
@@ -98,7 +99,9 @@ enum class Theme {
 
 @Serializable
 data class UiPreferences(
+    @SerialName("theme")
     val theme: Theme = Theme.SYSTEM,
+    @SerialName("locale")
     val locale: Locale = Locale.ENGLISH
 )
 

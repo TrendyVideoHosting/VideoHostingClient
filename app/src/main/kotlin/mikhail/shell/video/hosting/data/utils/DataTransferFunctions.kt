@@ -1,8 +1,5 @@
 package mikhail.shell.video.hosting.data.utils
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.webkit.MimeTypeMap
 import mikhail.shell.video.hosting.domain.errors.Error
 import mikhail.shell.video.hosting.domain.errors.UnexpectedError
@@ -20,14 +17,6 @@ import java.io.File
 import java.io.InputStream
 import java.net.ConnectException
 import java.net.SocketTimeoutException
-
-fun Context.isNetworkAvailable(): Boolean {
-    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val network = connectivityManager.activeNetwork
-    val capabilities = connectivityManager.getNetworkCapabilities(network)
-    return capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-}
 
 suspend fun <D> request(
     httpExceptionHandlers: Map<Int, (HttpException) -> Error> = emptyMap(),
@@ -85,17 +74,6 @@ fun httpExceptionHandler(
 fun unexpectedExceptionHandler(processing: (Exception) -> Error) = processing
 
 const val TRANSFER_BUFFER_SIZE = 10 * 1024 * 1024
-
-fun createEmptyFilePart(
-    mimeType: String = "application/octet-stream",
-    partName: String
-) : MultipartBody.Part {
-    return MultipartBody.Part.createFormData(
-        name = partName,
-        filename = "",
-        body = ByteArray(0).toRequestBody(contentType = mimeType.toMediaTypeOrNull())
-    )
-}
 
 fun FileProvider.uriToPart(
     uri: String,

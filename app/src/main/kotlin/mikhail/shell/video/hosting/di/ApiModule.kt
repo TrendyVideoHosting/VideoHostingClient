@@ -3,7 +3,6 @@ package mikhail.shell.video.hosting.di
 import android.content.Context
 import com.google.firebase.Firebase
 import com.google.firebase.messaging.messaging
-import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -18,9 +17,7 @@ import mikhail.shell.video.hosting.data.api.CommentApi
 import mikhail.shell.video.hosting.data.api.TokenInterceptor
 import mikhail.shell.video.hosting.data.api.UserApi
 import mikhail.shell.video.hosting.data.api.VideoApi
-import mikhail.shell.video.hosting.data.converters.EnumJsonConverter
 import mikhail.shell.video.hosting.data.converters.InstantConverter
-import mikhail.shell.video.hosting.data.converters.PlainEnumConverterFactory
 import mikhail.shell.video.hosting.data.providers.AndroidFileProvider
 import mikhail.shell.video.hosting.domain.providers.FileProvider
 import okhttp3.OkHttpClient
@@ -57,17 +54,8 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideEnumConverter() = EnumJsonConverter()
-
-    @Provides
-    @Singleton
-    fun provideGson(
-        instantConverter: InstantConverter,
-        enumJsonConverter: EnumJsonConverter
-    ) = GsonBuilder()
+    fun provideGson(instantConverter: InstantConverter) = GsonBuilder()
         .registerTypeAdapter(Instant::class.java, instantConverter)
-        .registerTypeHierarchyAdapter(Enum::class.java, enumJsonConverter)
-        .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create()
 
     @Provides
@@ -80,20 +68,14 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun providePlainEnumConverterFactory() = PlainEnumConverterFactory()
-
-    @Provides
-    @Singleton
     fun provideRetrofit(
         httpClient: OkHttpClient,
         scalarsConverterFactory: ScalarsConverterFactory,
-        plainEnumConverterFactory: PlainEnumConverterFactory,
         gsonConverterFactory: GsonConverterFactory
     ) = Retrofit.Builder()
         .client(httpClient)
         .baseUrl("$API_BASE_URL/")
         .addConverterFactory(scalarsConverterFactory)
-        .addConverterFactory(plainEnumConverterFactory)
         .addConverterFactory(gsonConverterFactory)
         .build()
 

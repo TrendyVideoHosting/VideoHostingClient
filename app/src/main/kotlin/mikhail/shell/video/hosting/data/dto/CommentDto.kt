@@ -1,19 +1,27 @@
 package mikhail.shell.video.hosting.data.dto
 
+import com.google.gson.annotations.SerializedName
 import mikhail.shell.video.hosting.domain.models.Comment
 import mikhail.shell.video.hosting.domain.models.CommentWithUser
 import kotlin.time.Instant
 
 data class CommentDto(
+    @SerializedName("comment_id")
     val commentId: Long,
+    @SerializedName("video_id")
     val videoId: Long,
+    @SerializedName("user_id")
     val userId: Long,
+    @SerializedName("date_time")
     val dateTime: Instant,
+    @SerializedName("text")
     val text: String,
 )
 
 data class CommentWithUserDto(
+    @SerializedName("comment")
     val comment: CommentDto,
+    @SerializedName("user")
     val user: UserDto
 )
 

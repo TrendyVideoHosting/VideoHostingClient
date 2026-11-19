@@ -3,6 +3,7 @@ package mikhail.shell.video.hosting.data.repositories
 import android.content.Context
 import com.google.common.net.HttpHeaders
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -346,20 +347,30 @@ class VideoRepositoryWithApi @Inject constructor(
 }
 
 data class VideoUploadingRequest(
+    @SerializedName("title")
     val title: String,
+    @SerializedName("channel_id")
     val channelId: Long,
+    @SerializedName("description")
     val description: String?
 )
 
 data class VideoMetaData(
+    @SerializedName("file_name")
     val fileName: String,
+    @SerializedName("mime_type")
     val mimeType: String,
+    @SerializedName("size")
     val size: Long
 )
 
 data class VideoEditingRequest(
+    @SerializedName("video_id")
     val videoId: Long,
+    @SerializedName("title")
     val title: String,
+    @SerializedName("description")
     val description: String?,
+    @SerializedName("cover_action")
     val coverAction: EditingActionDto
 )

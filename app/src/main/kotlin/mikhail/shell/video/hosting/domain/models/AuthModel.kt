@@ -1,11 +1,10 @@
 package mikhail.shell.video.hosting.domain.models
 
-data class AuthModel(
-    val token: String,
-    val userId: Long
-)
+import com.google.gson.annotations.SerializedName
 
-data class SignUpModel(
-    val password: String,
-    val user: UserCreationModel
+data class AuthModel(
+    @SerializedName("token")
+    val token: String,
+    @SerializedName("user_id")
+    val userId: Long
 )

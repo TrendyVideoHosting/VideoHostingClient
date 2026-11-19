@@ -1,10 +1,13 @@
 package mikhail.shell.video.hosting.data.dto
 
+import com.google.gson.annotations.SerializedName
 import mikhail.shell.video.hosting.domain.models.VideoWithChannelForUser
 
 data class VideoDetailsDto(
-    val video: VideoWithUserDto,
-    val channel: ChannelWithUserDto,
+    @SerializedName("video")
+    val video: VideoForUserDto,
+    @SerializedName("channel")
+    val channel: ChannelForUserDto,
 )
 
 fun VideoDetailsDto.toDomain() = VideoWithChannelForUser(

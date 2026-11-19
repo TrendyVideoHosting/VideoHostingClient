@@ -3,6 +3,7 @@ package mikhail.shell.video.hosting.data.repositories
 import android.content.Context
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import mikhail.shell.video.hosting.BuildConfig.API_BASE_URL
@@ -117,11 +118,17 @@ data class UserCreationErrorResponse(
 )
 
 data class UserEditingRequest(
+    @SerializedName("nick")
     val nick: String,
+    @SerializedName("name")
     val name: String?,
+    @SerializedName("bio")
     val bio: String?,
+    @SerializedName("tel")
     val tel: String?,
+    @SerializedName("email")
     val email: String?,
+    @SerializedName("avatar_action")
     val avatarAction: EditingActionDto
 )
 

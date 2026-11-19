@@ -41,18 +41,21 @@ android {
         debug {
             isDebuggable = true
             isMinifyEnabled = false
+            isShrinkResources = false
             buildConfigField("String", "API_BASE_URL", "\"http://192.168.1.2/api/v2\"")
             signingConfig = signingConfigs.getByName("debug")
         }
         create("staging") {
             isDebuggable = true
             isMinifyEnabled = false
+            isShrinkResources = false
             buildConfigField("String", "API_BASE_URL", "\"https://trendy-app.ru/api\"")
             signingConfig = signingConfigs.getByName("staging")
         }
         release {
             isDebuggable = false
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             buildConfigField("String", "API_BASE_URL", "\"https://trendy-app.ru/api\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

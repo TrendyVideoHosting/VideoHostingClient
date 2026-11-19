@@ -1,13 +1,20 @@
 package mikhail.shell.video.hosting.data.dto
 
+import com.google.gson.annotations.SerializedName
 import mikhail.shell.video.hosting.domain.models.User
 
 data class UserDto(
+    @SerializedName("user_id")
     val userId: Long,
+    @SerializedName("nick")
     val nick: String,
+    @SerializedName("name")
     val name: String?,
+    @SerializedName("bio")
     val bio: String?,
+    @SerializedName("tel")
     val tel: String?,
+    @SerializedName("email")
     val email: String?
 )
 

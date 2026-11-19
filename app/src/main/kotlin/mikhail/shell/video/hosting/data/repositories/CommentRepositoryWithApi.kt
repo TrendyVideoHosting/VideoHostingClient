@@ -1,5 +1,6 @@
 package mikhail.shell.video.hosting.data.repositories
 
+import com.google.gson.annotations.SerializedName
 import mikhail.shell.video.hosting.data.api.CommentApi
 import mikhail.shell.video.hosting.data.dto.toDomain
 import mikhail.shell.video.hosting.data.utils.request
@@ -45,11 +46,15 @@ class CommentRepositoryWithApi @Inject constructor(
 
 
 data class CommentCreationRequest(
+    @SerializedName("video_id")
     val videoId: Long,
+    @SerializedName("text")
     val text: String
 )
 
 data class CommentEditingRequest(
+    @SerializedName("comment_id")
     val commentId: Long,
+    @SerializedName("text")
     val text: String
 )

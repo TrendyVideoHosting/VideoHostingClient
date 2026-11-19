@@ -1,5 +1,6 @@
 package mikhail.shell.video.hosting.data.dto
 
+import com.google.gson.annotations.SerializedName
 import mikhail.shell.video.hosting.domain.models.Liking
 import mikhail.shell.video.hosting.domain.models.Video
 import mikhail.shell.video.hosting.domain.models.VideoForUser
@@ -7,13 +8,21 @@ import mikhail.shell.video.hosting.domain.models.VideoWithChannel
 import kotlin.time.Instant
 
 data class VideoDto(
+    @SerializedName("video_id")
     val videoId: Long,
+    @SerializedName("channel_id")
     val channelId: Long,
+    @SerializedName("title")
     val title: String,
+    @SerializedName("date_time")
     val dateTime: Instant,
+    @SerializedName("views")
     val views: Long,
+    @SerializedName("likes")
     val likes: Long,
+    @SerializedName("dislikes")
     val dislikes: Long,
+    @SerializedName("description")
     val description: String?,
 )
 
@@ -39,19 +48,28 @@ fun VideoDto.toDomain() = Video(
     description = description
 )
 
-data class VideoWithUserDto(
+data class VideoForUserDto(
+    @SerializedName("video_id")
     val videoId: Long,
+    @SerializedName("channel_id")
     val channelId: Long,
+    @SerializedName("title")
     val title: String,
+    @SerializedName("date_time")
     val dateTime: Instant,
+    @SerializedName("views")
     val views: Long,
+    @SerializedName("likes")
     val likes: Long,
-    val liking: Liking,
+    @SerializedName("dislikes")
     val dislikes: Long,
+    @SerializedName("liking")
+    val liking: Liking,
+    @SerializedName("description")
     val description: String?
 )
 
-fun VideoForUser.toDto() = VideoWithUserDto(
+fun VideoForUser.toDto() = VideoForUserDto(
     videoId = videoId,
     channelId = channelId,
     title = title,
@@ -63,7 +81,7 @@ fun VideoForUser.toDto() = VideoWithUserDto(
     description = description
 )
 
-fun VideoWithUserDto.toDomain() = VideoForUser(
+fun VideoForUserDto.toDomain() = VideoForUser(
     videoId = videoId,
     channelId = channelId,
     title = title,
@@ -76,7 +94,9 @@ fun VideoWithUserDto.toDomain() = VideoForUser(
 )
 
 data class VideoWithChannelDto(
+    @SerializedName("video")
     val video: VideoDto,
+    @SerializedName("channel")
     val channel: ChannelDto
 )
 

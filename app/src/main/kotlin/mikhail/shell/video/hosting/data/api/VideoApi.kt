@@ -3,8 +3,8 @@ package mikhail.shell.video.hosting.data.api
 import mikhail.shell.video.hosting.data.dto.PendingVideoDto
 import mikhail.shell.video.hosting.data.dto.VideoDetailsDto
 import mikhail.shell.video.hosting.data.dto.VideoDto
+import mikhail.shell.video.hosting.data.dto.VideoForUserDto
 import mikhail.shell.video.hosting.data.dto.VideoWithChannelDto
-import mikhail.shell.video.hosting.data.dto.VideoWithUserDto
 import mikhail.shell.video.hosting.data.repositories.VideoEditingRequest
 import mikhail.shell.video.hosting.data.repositories.VideoMetaData
 import mikhail.shell.video.hosting.data.repositories.VideoUploadingRequest
@@ -39,7 +39,7 @@ interface VideoApi {
     suspend fun rateVideo(
         @Path("video_id") videoId: Long,
         @Field("liking") liking: Liking
-    ): VideoWithUserDto
+    ): VideoForUserDto
     @GET("videos/channel/{channel_id}")
     suspend fun fetchVideoList(
         @Path("channel_id") channelId: Long,

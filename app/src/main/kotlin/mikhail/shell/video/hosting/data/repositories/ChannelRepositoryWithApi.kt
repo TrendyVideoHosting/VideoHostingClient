@@ -3,6 +3,7 @@ package mikhail.shell.video.hosting.data.repositories
 import android.content.Context
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import mikhail.shell.video.hosting.BuildConfig.API_BASE_URL
@@ -198,16 +199,25 @@ class ChannelRepositoryWithApi @Inject constructor(
 }
 
 data class ChannelCreationRequest(
+    @SerializedName("title")
     val title: String,
+    @SerializedName("alias")
     val alias: String?,
+    @SerializedName("description")
     val description: String?
 )
 
 data class ChannelEditingRequest(
+    @SerializedName("channel_id")
     val channelId: Long,
+    @SerializedName("title")
     val title: String,
+    @SerializedName("alias")
     val alias: String?,
+    @SerializedName("description")
     val description: String?,
+    @SerializedName("header_action")
     val headerAction: EditingActionDto,
+    @SerializedName("logo_action")
     val logoAction: EditingActionDto
 )

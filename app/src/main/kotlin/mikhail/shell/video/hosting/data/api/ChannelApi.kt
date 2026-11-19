@@ -1,7 +1,7 @@
 package mikhail.shell.video.hosting.data.api
 
 import mikhail.shell.video.hosting.data.dto.ChannelDto
-import mikhail.shell.video.hosting.data.dto.ChannelWithUserDto
+import mikhail.shell.video.hosting.data.dto.ChannelForUserDto
 import mikhail.shell.video.hosting.data.repositories.ChannelCreationRequest
 import mikhail.shell.video.hosting.data.repositories.ChannelEditingRequest
 import mikhail.shell.video.hosting.domain.models.Subscription
@@ -21,7 +21,7 @@ import retrofit2.http.Query
 
 interface ChannelApi {
     @GET("channels/{channel_id}/details")
-    suspend fun fetchChannelDetails(@Path("channel_id") channelId: Long): ChannelWithUserDto
+    suspend fun fetchChannelDetails(@Path("channel_id") channelId: Long): ChannelForUserDto
     @Multipart
     @POST("channels")
     suspend fun createChannel(
@@ -53,7 +53,7 @@ interface ChannelApi {
         @Path("channel_id") channelId: Long,
         @Field("subscription") subscription: Subscription,
         @Header("Messaging-Token") messagingToken: String
-    ): ChannelWithUserDto
+    ): ChannelForUserDto
     @GET("channels/{channel_id}")
     suspend fun fetchChannel(@Path("channel_id") channelId: Long): ChannelDto
     @DELETE("channels/{channel_id}")

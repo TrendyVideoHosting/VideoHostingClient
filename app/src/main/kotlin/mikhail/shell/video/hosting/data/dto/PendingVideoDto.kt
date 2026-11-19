@@ -1,3 +1,8 @@
 package mikhail.shell.video.hosting.data.dto
 
-data class PendingVideoDto(val tmpId: String)
+import com.google.gson.annotations.SerializedName
+
+data class PendingVideoDto(
+    @SerializedName("tmp_id")
+    val tmpId: String
+)

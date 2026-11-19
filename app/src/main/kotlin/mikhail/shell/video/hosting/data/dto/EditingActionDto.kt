@@ -1,5 +1,12 @@
 package mikhail.shell.video.hosting.data.dto
 
+import com.google.gson.annotations.SerializedName
+
 enum class EditingActionDto {
-    KEEP, REMOVE, EDIT
+    @SerializedName("keep")
+    KEEP,
+    @SerializedName("remove")
+    REMOVE,
+    @SerializedName("edit")
+    EDIT
 }
