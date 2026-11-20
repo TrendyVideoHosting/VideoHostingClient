@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VideoHosting"
-        tools:targetApi="31"
+        tools:targetApi="37"
         android:largeHeap="true">
         <activity
             android:name=".presentation.activities.MainActivity"

@@ -20,7 +20,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import mikhail.shell.video.hosting.R
 import mikhail.shell.video.hosting.di.NotificationEntryPoint
-import mikhail.shell.video.hosting.di.PresentationModule.HOST
+import mikhail.shell.video.hosting.di.MiscellaneousModule.HOST
 import mikhail.shell.video.hosting.domain.errors.Error
 import mikhail.shell.video.hosting.domain.errors.FileError
 import mikhail.shell.video.hosting.domain.managers.NotificationOrchestrator

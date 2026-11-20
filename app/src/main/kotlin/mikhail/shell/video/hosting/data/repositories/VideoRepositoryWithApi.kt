@@ -245,7 +245,7 @@ class VideoRepositoryWithApi @Inject constructor(
     }
 
     override fun getCoverUrl(videoId: Long, size: ImageSize): String {
-        return "$API_BASE_URL/videos/$videoId/cover?size=${size.name.lowercase()}"
+        return "$API_BASE_URL/videos/$videoId/cover?size=${gson.toJson(size)}"
     }
 
     override suspend fun incrementViews(videoId: Long): Result<Video, Error> = request {

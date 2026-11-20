@@ -15,8 +15,8 @@ import mikhail.shell.video.hosting.domain.errors.user.UserCreationError
 import mikhail.shell.video.hosting.domain.models.AuthModel
 import mikhail.shell.video.hosting.domain.models.Result
 import mikhail.shell.video.hosting.domain.models.UserCreationModel
-import mikhail.shell.video.hosting.domain.repositories.AuthRepository
 import mikhail.shell.video.hosting.domain.models.UserNameCheckPurpose
+import mikhail.shell.video.hosting.domain.repositories.AuthRepository
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -142,14 +142,8 @@ class AuthRepositoryWithApi @Inject constructor(
 
     private inline fun <reified T: Enum<*>> Response<*>.getErrors(): Map<String, T>? {
         if (isSuccessful) return null
-        val json = errorBody()!!.string()
-        val type = object : TypeToken<Map<String, String>>() {}.type
-        return gson.fromJson<Map<String, String>>(json, type).mapErrors<T>()
-    }
-
-    private inline fun <reified T: Enum<*>> Map<String, String>.mapErrors(): Map<String, T>? {
-        return map {
-            it.key to java.lang.Enum.valueOf(T::class.java as Class<out Enum<*>>, it.value.uppercase())
-        }.toMap() as? Map<String, T>
+        val json = errorBody()?.string()?: return null
+        val type = TypeToken.getParameterized(Map::class.java).type
+        return gson.fromJson<Map<String, T>>(json, type)
     }
 }

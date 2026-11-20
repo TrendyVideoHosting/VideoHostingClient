@@ -23,7 +23,7 @@ import mikhail.shell.video.hosting.domain.errors.Error
 import mikhail.shell.video.hosting.domain.errors.network.NetworkError
 import mikhail.shell.video.hosting.domain.managers.NotificationOrchestrator
 import mikhail.shell.video.hosting.domain.usecases.videos.ConfirmVideoUpload
-import mikhail.shell.video.hosting.domain.usecases.videos.DeleteVideo
+import mikhail.shell.video.hosting.domain.usecases.videos.RemoveVideo
 import mikhail.shell.video.hosting.domain.usecases.videos.UploadSource
 import mikhail.shell.video.hosting.domain.validation.getNetworkErrorMessage
 import kotlin.uuid.ExperimentalUuidApi
@@ -35,7 +35,7 @@ class VideoUploadingService : Service() {
     private lateinit var notificationOrchestrator: NotificationOrchestrator
     private lateinit var uploadSource: UploadSource
     private lateinit var confirmUpload: ConfirmVideoUpload
-    private lateinit var removeVideo: DeleteVideo
+    private lateinit var removeVideo: RemoveVideo
     private var UPLOAD_NOTIFICATION_ID: Int? = null
     private lateinit var notificationManager: NotificationManager
     private val coroutineScope = CoroutineScope(Dispatchers.IO)

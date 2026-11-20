@@ -55,7 +55,7 @@ class ChannelRepositoryWithApi @Inject constructor(
         channelId: Long,
         size: ImageSize
     ): String {
-        return "$API_BASE_URL/channels/$channelId/header?size=${size.name.lowercase()}"
+        return "$API_BASE_URL/channels/$channelId/header?size=${gson.toJson(size)}"
     }
 
     override suspend fun create(channel: ChannelCreationModel): Result<Channel, Error> = request(
@@ -87,7 +87,7 @@ class ChannelRepositoryWithApi @Inject constructor(
     }
 
     override fun constructLogoUrl(channelId: Long, size: ImageSize): String {
-        return "$API_BASE_URL/channels/$channelId/logo?size=${size.name.lowercase()}"
+        return "$API_BASE_URL/channels/$channelId/logo?size=${gson.toJson(size)}"
     }
 
     override suspend fun existsByTitle(

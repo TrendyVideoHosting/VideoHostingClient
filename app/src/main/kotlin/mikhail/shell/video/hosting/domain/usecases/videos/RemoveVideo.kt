@@ -5,7 +5,7 @@ import mikhail.shell.video.hosting.domain.models.Result
 import mikhail.shell.video.hosting.domain.repositories.VideoRepository
 import javax.inject.Inject
 
-class DeleteVideo @Inject constructor(
+class RemoveVideo @Inject constructor(
     private val videoRepository: VideoRepository
 ) {
     suspend operator fun invoke(videoId: Long): Result<Unit, Error> = videoRepository.deleteVideo(videoId)

@@ -100,7 +100,7 @@ class UserRepositoryWithApi @Inject constructor(
         userId: Long,
         size: ImageSize
     ): String {
-        return "$API_BASE_URL/users/$userId/avatar?size=${size.name.lowercase()}"
+        return "$API_BASE_URL/users/$userId/avatar?size=${gson.toJson(size)}"
     }
 
     override suspend fun subscribeToNotifications(): Result<Unit, Error> = request {

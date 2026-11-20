@@ -34,7 +34,7 @@ import mikhail.shell.video.hosting.domain.usecases.comments.RemoveComment
 import mikhail.shell.video.hosting.domain.usecases.comments.ValidateComment
 import mikhail.shell.video.hosting.domain.usecases.user.ConstructAvatarUrl
 import mikhail.shell.video.hosting.domain.usecases.user.GetUserDetails
-import mikhail.shell.video.hosting.domain.usecases.videos.DeleteVideo
+import mikhail.shell.video.hosting.domain.usecases.videos.RemoveVideo
 import mikhail.shell.video.hosting.domain.usecases.videos.GetVideoDetails
 import mikhail.shell.video.hosting.domain.usecases.videos.GetVideoSourceUrl
 import mikhail.shell.video.hosting.domain.usecases.videos.IncrementViews
@@ -56,7 +56,7 @@ class VideoScreenViewModel @AssistedInject constructor(
     private val rateVideo: RateVideo,
     private val subscribe: Subscribe,
     private val incrementViews: IncrementViews,
-    private val deleteVideo: DeleteVideo,
+    private val removeVideo: RemoveVideo,
     private val validateComment: ValidateComment,
     private val postComment: PostComment,
     private val editComment: EditComment,
@@ -231,7 +231,7 @@ class VideoScreenViewModel @AssistedInject constructor(
             it.copy(isRemoving = true)
         }
         viewModelScope.launch {
-            deleteVideo(videoId).onSuccess {
+            removeVideo(videoId).onSuccess {
                 _state.update {
                     it.copy(isRemoving = false)
                 }

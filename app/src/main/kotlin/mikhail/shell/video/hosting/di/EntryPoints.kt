@@ -10,7 +10,7 @@ import mikhail.shell.video.hosting.domain.managers.NotificationOrchestrator
 import mikhail.shell.video.hosting.domain.usecases.user.ObserveUserDetails
 import mikhail.shell.video.hosting.domain.usecases.user.SubscribeToNotifications
 import mikhail.shell.video.hosting.domain.usecases.videos.ConfirmVideoUpload
-import mikhail.shell.video.hosting.domain.usecases.videos.DeleteVideo
+import mikhail.shell.video.hosting.domain.usecases.videos.RemoveVideo
 import mikhail.shell.video.hosting.domain.usecases.videos.UploadSource
 
 @EntryPoint
@@ -25,7 +25,7 @@ interface VideoUploadingEntryPoint {
     fun getNotificationOrchestrator(): NotificationOrchestrator
     fun getUploadVideoSource(): UploadSource
     fun getConfirmVideoUpload(): ConfirmVideoUpload
-    fun getRemoveVideo(): DeleteVideo
+    fun getRemoveVideo(): RemoveVideo
 }
 
 @EntryPoint

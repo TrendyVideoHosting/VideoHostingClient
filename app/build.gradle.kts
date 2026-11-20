@@ -47,9 +47,13 @@ android {
         }
         create("staging") {
             isDebuggable = true
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             buildConfigField("String", "API_BASE_URL", "\"https://trendy-app.ru/api\"")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             signingConfig = signingConfigs.getByName("staging")
         }
         release {
