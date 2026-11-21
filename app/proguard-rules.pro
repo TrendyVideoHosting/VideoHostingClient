@@ -1,1 +1,3 @@
--keepattributes SourceFile,LineNumberTable
+-keepclasseswithmembers class * {
+    @org.junit.Test <methods>;
+}

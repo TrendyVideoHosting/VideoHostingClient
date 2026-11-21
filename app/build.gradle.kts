@@ -15,12 +15,13 @@ plugins {
 android {
     namespace = "mikhail.shell.video.hosting"
     compileSdk = 37
+    testBuildType = "release"
     defaultConfig {
         applicationId = "mikhail.shell.video.hosting"
         minSdk = 26
         targetSdk = 37
-        versionCode = 21
-        versionName = "3.1.2"
+        versionCode = 22
+        versionName = "3.1.3"
         testInstrumentationRunner = "mikhail.shell.video.hosting.VideoHostingTestsRunner"
     }
     signingConfigs {
@@ -47,19 +48,15 @@ android {
         }
         create("staging") {
             isDebuggable = true
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             buildConfigField("String", "API_BASE_URL", "\"https://trendy-app.ru/api\"")
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
             signingConfig = signingConfigs.getByName("staging")
         }
         release {
             isDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             buildConfigField("String", "API_BASE_URL", "\"https://trendy-app.ru/api\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -109,7 +106,6 @@ dependencies {
     testImplementation(libs.junit)
     implementation(libs.kotlinx.datetime)
 
-    //androidTestImplementation(libs.androidx.runner)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -136,12 +132,17 @@ dependencies {
     implementation (libs.androidx.hilt.navigation.compose)
     testImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(
+        "com.google.auto.value:auto-value-annotations:1.11.1"
+    )
 
     implementation (libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.converter.scalars)
     implementation (libs.okhttp)
     implementation (libs.logging.interceptor)
+    androidTestImplementation(libs.okhttp.mock.webserver)
+    androidTestImplementation(libs.okhttp.tls)
 
     implementation(libs.androidx.media3.exoplayer)
     implementation (libs.androidx.media3.ui)
@@ -162,4 +163,12 @@ dependencies {
     implementation(libs.firebase.perf)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+}
+
+tasks.withType<Test>().configureEach {
+    testLogging {
+        events("passed", "failed", "skipped", "standardOut", "standardError")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStandardStreams = true
+    }
 }
