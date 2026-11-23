@@ -1,6 +1,7 @@
 package mikhail.shell.video.hosting.data.utils
 
 import android.webkit.MimeTypeMap
+import com.google.gson.Gson
 import mikhail.shell.video.hosting.domain.errors.Error
 import mikhail.shell.video.hosting.domain.errors.UnexpectedError
 import mikhail.shell.video.hosting.domain.errors.network.NetworkError
@@ -13,6 +14,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import retrofit2.HttpException
+import retrofit2.Response
 import java.io.File
 import java.io.InputStream
 import java.net.ConnectException
@@ -136,4 +138,12 @@ suspend fun InputStream.process(
 
 fun String.parseFileSize(): Long { // from HTTP-header
     return substringAfter("/").toLong()
+}
+
+inline fun <reified T> Gson.parseErrorResponse(response: Response<*>): T {
+    return fromJson(response.errorBody()!!.string(), T::class.java)
+}
+
+inline fun <reified T : Enum<*>> Gson.toEnumString(value: T): String {
+    return toJsonTree(value).asString
 }

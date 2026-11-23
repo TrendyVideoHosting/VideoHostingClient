@@ -15,6 +15,7 @@ import mikhail.shell.video.hosting.data.dto.toDomain
 import mikhail.shell.video.hosting.data.utils.httpExceptionHandler
 import mikhail.shell.video.hosting.data.utils.invalidateCache
 import mikhail.shell.video.hosting.data.utils.request
+import mikhail.shell.video.hosting.data.utils.toEnumString
 import mikhail.shell.video.hosting.data.utils.uriToPart
 import mikhail.shell.video.hosting.domain.errors.Error
 import mikhail.shell.video.hosting.domain.errors.TextError
@@ -55,7 +56,7 @@ class ChannelRepositoryWithApi @Inject constructor(
         channelId: Long,
         size: ImageSize
     ): String {
-        return "$API_BASE_URL/channels/$channelId/header?size=${gson.toJson(size)}"
+        return "$API_BASE_URL/channels/$channelId/header?size=${gson.toEnumString(size)}"
     }
 
     override suspend fun create(channel: ChannelCreationModel): Result<Channel, Error> = request(
@@ -87,7 +88,7 @@ class ChannelRepositoryWithApi @Inject constructor(
     }
 
     override fun constructLogoUrl(channelId: Long, size: ImageSize): String {
-        return "$API_BASE_URL/channels/$channelId/logo?size=${gson.toJson(size)}"
+        return "$API_BASE_URL/channels/$channelId/logo?size=${gson.toEnumString(size)}"
     }
 
     override suspend fun existsByTitle(

@@ -17,6 +17,7 @@ import mikhail.shell.video.hosting.data.api.CommentApi
 import mikhail.shell.video.hosting.data.api.TokenInterceptor
 import mikhail.shell.video.hosting.data.api.UserApi
 import mikhail.shell.video.hosting.data.api.VideoApi
+import mikhail.shell.video.hosting.data.converters.EnumConverterFactory
 import mikhail.shell.video.hosting.data.converters.InstantConverter
 import mikhail.shell.video.hosting.data.providers.AndroidFileProvider
 import mikhail.shell.video.hosting.domain.providers.FileProvider
@@ -60,6 +61,10 @@ object ApiModule {
 
     @Provides
     @Singleton
+    fun provideEnumConverterFactory(gson: Gson) = EnumConverterFactory(gson)
+
+    @Provides
+    @Singleton
     fun provideGsonConverterFactory(gson: Gson) = GsonConverterFactory.create(gson)
 
     @Provides
@@ -70,11 +75,13 @@ object ApiModule {
     @Singleton
     fun provideRetrofit(
         httpClient: OkHttpClient,
+        enumConverterFactory: EnumConverterFactory,
         scalarsConverterFactory: ScalarsConverterFactory,
         gsonConverterFactory: GsonConverterFactory
     ) = Retrofit.Builder()
         .client(httpClient)
         .baseUrl("$API_BASE_URL/")
+        .addConverterFactory(enumConverterFactory)
         .addConverterFactory(scalarsConverterFactory)
         .addConverterFactory(gsonConverterFactory)
         .build()

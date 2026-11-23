@@ -9,6 +9,7 @@ import com.google.gson.stream.JsonWriter
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.test.runTest
+import mikhail.shell.video.hosting.data.converters.EnumConverterFactory
 import mikhail.shell.video.hosting.domain.models.AuthModel
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
@@ -37,8 +38,9 @@ class AuthApiTests {
     lateinit var server: MockWebServer
     lateinit var client: OkHttpClient
     lateinit var gson: Gson
-    lateinit var gsonConverterFactory: GsonConverterFactory
+    lateinit var enumConverterFactory: EnumConverterFactory
     lateinit var scalarsConverterFactory: ScalarsConverterFactory
+    lateinit var gsonConverterFactory: GsonConverterFactory
     lateinit var retrofit: Retrofit
     lateinit var api: AuthApi
     @Before
@@ -71,8 +73,9 @@ class AuthApiTests {
                 }
             })
             .create()
-        gsonConverterFactory = GsonConverterFactory.create(gson)
+        enumConverterFactory = EnumConverterFactory(gson)
         scalarsConverterFactory = ScalarsConverterFactory.create()
+        gsonConverterFactory = GsonConverterFactory.create(gson)
         retrofit = Retrofit.Builder()
             .baseUrl(server.url("/"))
             .client(client)
